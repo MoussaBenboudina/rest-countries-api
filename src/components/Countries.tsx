@@ -6,6 +6,7 @@ import Article from "./Article";
 type Country = {
   name: { common: string };
   region: string;
+  flags: { svg: string };
 };
 
 type Region = {
@@ -29,7 +30,7 @@ export default function Countries() {
   ];
 
   const filteredCountries = countries.filter((country) => {
-    if (filter == "All") return true;
+    if (filter === "All") return true;
     return country.region === filter;
   });
 
@@ -46,8 +47,7 @@ export default function Countries() {
       try {
         const res = await fetch("https://restcountries.com/v3.1/all");
         const data = await res.json();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        setCountries(data.filter((e: any) => e.name.common !== "Israel"));
+        setCountries(data.filter((e: Country) => e.name.common !== "Israel"));
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -65,8 +65,8 @@ export default function Countries() {
         </div>
       ) : (
         <div className="">
-          <div className="flex justify-center  gap-2 flex-col sm:flex-col md:flex-col lg:flex-row lg:justify-between xl:flex-row xl:justify-between items-center w-full h-[160px] px-[12%]">
-            <form className="form relative ">
+          <div className="flex justify-center gap-2 flex-col sm:flex-col md:flex-col lg:flex-row lg:justify-between xl:flex-row xl:justify-between items-center w-full h-[160px] px-[12%]">
+            <form className="form relative">
               <button className="absolute left-2 -translate-y-1/2 top-1/2 p-1">
                 <svg
                   width="17"
@@ -136,7 +136,13 @@ export default function Countries() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Article {...country} />
+                <Article
+                  name={country.name}
+                  region={country.region}
+                  flags={country.flags}
+                  population={""}
+                  subregion={""}
+                />
               </motion.div>
             ))}
           </ul>

@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://MoussaBenboudina.github.io/rest-countries-api",
   "dependencies": {
     "framer-motion": "^11.2.10",
     "react": "^18.2.0",

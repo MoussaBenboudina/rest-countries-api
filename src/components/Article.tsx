@@ -13,13 +13,7 @@ type ArticleProps = {
   subregion: string;
 };
 
-const Article: React.FC<ArticleProps> = ({
-  flags,
-  name,
-  // population,
-  region,
-  // subregion,
-}) => {
+const Article: React.FC<ArticleProps> = ({ flags, name, region }) => {
   return (
     <div className="min-w-[350px] h-[240px] shadow-lg rounded-lg flex flex-col justify-center items-center  bg-white dark:bg-gray-800 py-2">
       <img
